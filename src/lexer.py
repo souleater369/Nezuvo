@@ -1,4 +1,4 @@
-from src.token import Token, IDENTIFIER
+from src.token import Token, IDENTIFIER, NUMBER, EQUALS, EOF
 
 
 KEYWORDS = {
@@ -29,6 +29,10 @@ class Lexer:
 
     def has_more_characters(self):
         return self.position < len(self.text)
+    
+    def skip_whitespace(self):
+        while self.has_more_characters() and self.current_character().isspace():
+            self.advance()
 
 
     def read_word(self):
@@ -48,3 +52,35 @@ class Lexer:
             return Token(KEYWORDS[word], word)
 
         return Token(IDENTIFIER, word)
+    
+    def read_number(self):
+        number = ""
+
+        while self.has_more_characters() and self.current_character().isdigit():
+            number += self.current_character()
+            self.advance()
+
+        return number
+    
+    def get_next_token(self):
+    
+
+        while self.has_more_characters():
+
+            current = self.current_character()
+
+            if current.isspace():
+                self.skip_whitespace()
+                continue
+
+            if current.isalpha():
+                return self.make_word_token()
+
+            if current.isdigit():
+                number = self.read_number()
+                return Token(NUMBER, number)
+
+            if current == "=":
+                self.advance()
+                return Token(EQUALS, "=")
+        return Token(EOF,None)
