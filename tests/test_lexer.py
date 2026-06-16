@@ -1,9 +1,9 @@
 from src.lexer import Lexer
 
 
-lexer = Lexer("     nez age")
+lexer = Lexer("age")
 
+token = lexer.make_word_token()
 
-lexer.skip_whitespace()
-
-print(lexer.current_character())
+print(token.token_type)
+print(token.value)
