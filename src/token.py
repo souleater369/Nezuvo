@@ -8,6 +8,9 @@ PLUS = "PLUS"
 MINUS = "MINUS"
 EQUALS = "EQUALS"
 
+STAR = "STAR"
+SLASH = "SLASH"
+
 EOF = "EOF"
 
 

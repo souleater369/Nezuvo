@@ -1,4 +1,14 @@
-from src.token import Token, IDENTIFIER, NUMBER, EQUALS, EOF
+from src.token import (
+    Token,
+    IDENTIFIER,
+    NUMBER,
+    EQUALS,
+    EOF,
+    PLUS,
+    MINUS,
+    STAR,
+    SLASH
+)
 
 
 KEYWORDS = {
@@ -63,9 +73,8 @@ class Lexer:
         return number
     
     def get_next_token(self):
-    
 
-        while self.has_more_characters():
+         while self.has_more_characters():
 
             current = self.current_character()
 
@@ -83,4 +92,21 @@ class Lexer:
             if current == "=":
                 self.advance()
                 return Token(EQUALS, "=")
-        return Token(EOF,None)
+
+            if current == "+":
+                self.advance()
+                return Token(PLUS, "+")
+            
+            if current == "-":
+                self.advance()
+                return Token(MINUS, "-")
+
+            if current == "*":
+                self.advance()
+                return Token(STAR, "*")
+
+            if current == "/":
+                self.advance()
+                return Token(SLASH, "/")
+
+         return Token(EOF, None)
